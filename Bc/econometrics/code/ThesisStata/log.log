@@ -1,0 +1,406 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\chadi\OneDrive\Dokumenty\Stata\log.log
+  log type:  text
+ opened on:  28 Feb 2023, 12:48:02
+
+. import delimited mph.csv
+(3 vars, 486 obs)
+
+. rename iè ico
+
+. label variable ico "IČO"
+
+. rename mphmzdypøidanáhodnota mph
+
+. duplicates drop
+
+Duplicates in terms of all variables
+
+(11 observations deleted)
+
+. duplicates drop ico rok, force
+
+Duplicates in terms of ico rok
+
+(9 observations deleted)
+
+. save "C:\Users\chadi\OneDrive\Dokumenty\Stata\mph.dta"
+file C:\Users\chadi\OneDrive\Dokumenty\Stata\mph.dta already exists
+r(602);
+
+end of do-file
+
+r(602);
+
+. do "C:\Users\chadi\AppData\Local\Temp\STD1054_000000.tmp"
+
+. ************************************************************************
+. *Markups and Public Procurement
+. *bakalářská práce
+. *Institut ekonomických studií
+. *Matěj Bajgar, D.Phil.
+. *Marek Chadim
+. ************************************************************************
+. 
+. *merge mph 500
+. 
+. cd "C:\Users\chadi\OneDrive\Dokumenty\Stata" 
+C:\Users\chadi\OneDrive\Dokumenty\Stata
+
+. log using "C:\Users\chadi\OneDrive\Dokumenty\Stata\bakalarka.log", replace
+log file already open
+r(604);
+
+end of do-file
+
+r(604);
+
+. do "C:\Users\chadi\AppData\Local\Temp\STD1054_000000.tmp"
+
+. ************************************************************************
+. *Markups and Public Procurement
+. *bakalářská práce
+. *Institut ekonomických studií
+. *Matěj Bajgar, D.Phil.
+. *Marek Chadim
+. ************************************************************************
+. 
+. *merge mph 500
+. 
+. cd "C:\Users\chadi\OneDrive\Dokumenty\Stata" 
+C:\Users\chadi\OneDrive\Dokumenty\Stata
+
+. 
+. import delimited mph.csv
+no; data in memory would be lost
+r(4);
+
+end of do-file
+
+r(4);
+
+. do "C:\Users\chadi\AppData\Local\Temp\STD1054_000000.tmp"
+
+. ************************************************************************
+. *Markups and Public Procurement
+. *bakalářská práce
+. *Institut ekonomických studií
+. *Matěj Bajgar, D.Phil.
+. *Marek Chadim
+. ************************************************************************
+. 
+. *merge mph 500
+. 
+. cd "C:\Users\chadi\OneDrive\Dokumenty\Stata" 
+C:\Users\chadi\OneDrive\Dokumenty\Stata
+
+. 
+. import delimited mph.csv,clear
+(3 vars, 486 obs)
+
+. rename iè ico
+
+. label variable ico "IČO"
+
+. rename mphmzdypøidanáhodnota mph
+
+. duplicates drop
+
+Duplicates in terms of all variables
+
+(11 observations deleted)
+
+. duplicates drop ico rok, force
+
+Duplicates in terms of ico rok
+
+(9 observations deleted)
+
+. save "C:\Users\chadi\OneDrive\Dokumenty\Stata\mph.dta", replace
+file C:\Users\chadi\OneDrive\Dokumenty\Stata\mph.dta saved
+
+. merge 1:1 ico rok using "magnus500"
+variable _merge already defined
+r(110);
+
+end of do-file
+
+r(110);
+
+. use "analyza499"
+
+. merge m:1 ico using "vybery499"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           407
+        from master                         0  (_merge==1)
+        from using                        407  (_merge==2)
+
+    matched                            70,021  (_merge==3)
+    -----------------------------------------
+
+. save "C:\Users\chadi\OneDrive\Dokumenty\Stata\magnus499.dta"
+file C:\Users\chadi\OneDrive\Dokumenty\Stata\magnus499.dta already exists
+r(602);
+
+. save "C:\Users\chadi\OneDrive\Dokumenty\Stata\magnus499.dta", replace
+file C:\Users\chadi\OneDrive\Dokumenty\Stata\magnus499.dta saved
+
+. append using "C:\Users\chadi\OneDrive\Dokumenty\Stata\magnus500.dta"
+(note: variable zam_kat was str23, now str25 to accommodate using data's
+       values)
+(note: variable pp was float, now double to accommodate using data's values)
+(label _merge already defined)
+
+. duplicates drop // 4,214 observations delete
+option 214 not allowed
+r(198);
+
+. 
+. duplicates drop ico rok, force // 23,661 observations deleted
+invalid '661' 
+r(198);
+
+. duplicates drop
+
+Duplicates in terms of all variables
+
+(4,214 observations deleted)
+
+. duplicates drop ico rok, force
+
+Duplicates in terms of ico rok
+
+(24,023 observations deleted)
+
+. sum pp if pp<10^8,d
+
+                  PP - Produktivita práce
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%       -60000      -1.51e+08
+ 5%            0      -1.24e+08
+10%        12000      -1.09e+08       Obs              17,601
+25%     318333.3      -7.08e+07       Sum of Wgt.      17,601
+
+50%     546153.9                      Mean            9952686
+                        Largest       Std. Dev.      2.09e+07
+75%      4436934       9.99e+07
+90%     3.96e+07       9.99e+07       Variance       4.39e+14
+95%     6.21e+07       1.00e+08       Skewness        2.26431
+99%     9.06e+07       1.00e+08       Kurtosis       8.334249
+
+. 
+. sum pp if pp>10^8,d
+
+                  PP - Produktivita práce
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     1.01e+08       1.00e+08
+ 5%     1.06e+08       1.00e+08
+10%     1.13e+08       1.00e+08       Obs               1,788
+25%     1.37e+08       1.00e+08       Sum of Wgt.       1,788
+
+50%     2.11e+08                      Mean           4.74e+08
+                        Largest       Std. Dev.      9.77e+08
+75%     4.09e+08       1.17e+10
+90%     9.14e+08       1.21e+10       Variance       9.55e+17
+95%     1.69e+09       1.35e+10       Skewness       7.515397
+99%     4.88e+09       1.42e+10       Kurtosis       79.30749
+
+. 
+. replace pp = pp/1000 if pp>10^8
+(1,788 real changes made)
+
+. 
+. sum pp,d
+
+                  PP - Produktivita práce
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%    -34590.91      -1.51e+08
+ 5%            0      -1.24e+08
+10%     84218.75      -1.09e+08       Obs              19,389
+25%     283850.6      -7.08e+07       Sum of Wgt.      19,389
+
+50%     506810.5                      Mean            9078595
+                        Largest       Std. Dev.      2.01e+07
+75%      1763000       9.99e+07
+90%     3.60e+07       9.99e+07       Variance       4.06e+14
+95%     5.98e+07       1.00e+08       Skewness       2.430429
+99%     8.94e+07       1.00e+08       Kurtosis       9.255041
+
+. gen GO = trzby
+(3,276 missing values generated)
+
+. 
+. gen W = mt * trzby / 100
+(18,871 missing values generated)
+
+. 
+. gen II = naklady - W
+(18,877 missing values generated)
+
+. 
+. replace II = . if II<0
+(77 real changes made, 77 to missing)
+
+. 
+. gen VA = GO - II
+(18,954 missing values generated)
+
+. 
+. gen L = VA / pp if VA/pp>0
+(29,869 missing values generated)
+
+. 
+. gen K = aktiva
+(1,674 missing values generated)
+
+. 
+. sum GO W II VA L K
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+          GO |     39,440    1.57e+08    8.62e+08  -3.78e+07   4.18e+10
+           W |     23,845    2.82e+07    1.52e+08  -1.27e+09   9.15e+09
+          II |     23,762    1.46e+08    6.48e+08          0   2.02e+10
+          VA |     23,762    2.58e+07    1.96e+08  -7.25e+09   2.45e+10
+           L |     12,847    66.77506    284.3595   .0000528      26568
+-------------+---------------------------------------------------------
+           K |     41,042    3.39e+07    2.66e+08   -6367000   1.53e+10
+
+. do "C:\Users\chadi\AppData\Local\Temp\STD1054_000000.tmp"
+
+. gen go = ln(GO)
+(4,133 missing values generated)
+
+. gen w = ln(W)
+(19,357 missing values generated)
+
+. gen ii = ln(II)
+(19,092 missing values generated)
+
+. gen va = ln(VA)
+(20,971 missing values generated)
+
+. gen l = ln(L)
+(29,869 missing values generated)
+
+. gen k = ln(K)
+(3,465 missing values generated)
+
+. 
+end of do-file
+
+. reg go k l ii 
+
+      Source |       SS           df       MS      Number of obs   =    12,487
+-------------+----------------------------------   F(3, 12483)     >  99999.00
+       Model |  22681.9838         3  7560.66125   Prob > F        =    0.0000
+    Residual |  449.478873    12,483   .03600728   R-squared       =    0.9806
+-------------+----------------------------------   Adj R-squared   =    0.9806
+       Total |  23131.4626    12,486  1.85259191   Root MSE        =    .18976
+
+------------------------------------------------------------------------------
+          go |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           k |   .0244474   .0012387    19.74   0.000     .0220194    .0268755
+           l |   .0269324   .0007915    34.03   0.000     .0253809    .0284839
+          ii |   .8936182   .0019027   469.66   0.000     .8898886    .8973478
+       _cons |   1.710961   .0266577    64.18   0.000     1.658708    1.763214
+------------------------------------------------------------------------------
+
+. xtset ico rok
+       panel variable:  ico (unbalanced)
+        time variable:  rok, 1993 to 2022, but with gaps
+                delta:  1 unit
+
+. prodest go, method(wrdg) free(l) proxy(ii) state(k)
+
+
+
+wrdg productivity estimator                     Cobb-Douglas PF
+
+Dependent variable: revenue                     Number of obs      =      6196
+Group variable (id): ico                        Number of groups   =      2359
+Time variable (t): rok
+                                                Obs per group: min =         1
+                                                               avg =       5.3
+                                                               max =        20
+
+------------------------------------------------------------------------------
+          go |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           l |   .0436489   .0019112    22.84   0.000     .0399031    .0473947
+           k |   .0237531   .0039788     5.97   0.000     .0159549    .0315514
+          ii |   .8387882   .0058111   144.34   0.000     .8273986    .8501778
+------------------------------------------------------------------------------
+Wald test on Constant returns to scale: Chi2 = 220.06
+                                          p = (0.00)
+
+. do "C:\Users\chadi\AppData\Local\Temp\STD1054_000000.tmp"
+
+. 
+. save "magnus", replace
+file magnus.dta saved
+
+. 
+end of do-file
+
+.  sum GO W II VA L K
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+          GO |     39,440    1.57e+08    8.62e+08  -3.78e+07   4.18e+10
+           W |     23,845    2.82e+07    1.52e+08  -1.27e+09   9.15e+09
+          II |     23,762    1.46e+08    6.48e+08          0   2.02e+10
+          VA |     23,762    2.58e+07    1.96e+08  -7.25e+09   2.45e+10
+           L |     12,847    66.77506    284.3595   .0000528      26568
+-------------+---------------------------------------------------------
+           K |     41,042    3.39e+07    2.66e+08   -6367000   1.53e+10
+
+. reg go k l ii
+
+      Source |       SS           df       MS      Number of obs   =    12,487
+-------------+----------------------------------   F(3, 12483)     >  99999.00
+       Model |  22681.9838         3  7560.66125   Prob > F        =    0.0000
+    Residual |  449.478873    12,483   .03600728   R-squared       =    0.9806
+-------------+----------------------------------   Adj R-squared   =    0.9806
+       Total |  23131.4626    12,486  1.85259191   Root MSE        =    .18976
+
+------------------------------------------------------------------------------
+          go |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           k |   .0244474   .0012387    19.74   0.000     .0220194    .0268755
+           l |   .0269324   .0007915    34.03   0.000     .0253809    .0284839
+          ii |   .8936182   .0019027   469.66   0.000     .8898886    .8973478
+       _cons |   1.710961   .0266577    64.18   0.000     1.658708    1.763214
+------------------------------------------------------------------------------
+
+. prodest go, method(wrdg) free(l) proxy(ii) state(k)
+
+
+
+wrdg productivity estimator                     Cobb-Douglas PF
+
+Dependent variable: revenue                     Number of obs      =      6196
+Group variable (id): ico                        Number of groups   =      2359
+Time variable (t): rok
+                                                Obs per group: min =         1
+                                                               avg =       5.3
+                                                               max =        20
+
+------------------------------------------------------------------------------
+          go |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           l |   .0436489   .0019112    22.84   0.000     .0399031    .0473947
+           k |   .0237531   .0039788     5.97   0.000     .0159549    .0315514
+          ii |   .8387882   .0058111   144.34   0.000     .8273986    .8501778
+------------------------------------------------------------------------------
+Wald test on Constant returns to scale: Chi2 = 220.06
+                                          p = (0.00)
+
+. exit, clear

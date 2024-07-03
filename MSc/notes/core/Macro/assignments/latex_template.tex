@@ -1,0 +1,93 @@
+\documentclass[a4paper,10pt,american]{article}
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs,accents} %important math packages
+\usepackage{enumerate} % package for making different lists
+\usepackage[T1]{fontenc} % Encoding of fonts
+\usepackage{lmodern} % Latin modern font - needed for fontenc
+\usepackage[utf8]{inputenc} % Encoding of input text
+\usepackage[kerning]{microtype} % Better looking text
+\usepackage[babel]{csquotes} % Better looking quotes
+\usepackage{booktabs} % Better looking tables
+\usepackage{babel} % Language control, for hyphenation etc
+\usepackage{amsthm} % Package for theorem and definition enviroments
+\usepackage{hyperref} % URLs 
+\usepackage{datetime} % Date format
+%\usepackage[affil-it]{authblk} % For the title, name, etc
+\usepackage[bottom]{footmisc} % For placing footnotes in the bottom of the page
+\usepackage{setspace} % For spacing
+
+% For writing definitions
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
+% Package for drawing in Latex. Depending on your installation you might need compat=1.12 or 1.11 uncommented.  
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+%\pgfplotsset{compat=1.12}
+\pgfplotsset{compat=1.11}
+
+% For better figure placement in documents. Use [H] instead of the usual [htbp]. Inserted at the same place as in the code, as you normally want it to. 
+\usepackage{float}
+
+% Row break instead of indent for new paragraph. 
+\usepgfplotslibrary{fillbetween}
+\setlength{\parskip}{10pt plus 1pt minus 1pt}
+\setlength{\parindent}{0in}
+\onehalfspacing % Define spacing
+
+% Examples of personal commands to simplify writing stuff you use often. 
+\newcommand{\reals}{\mathbb{R}} 
+\newcommand{\rtwo}{\mathbb{R}^2}
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\lab}[1]{\ref{#1}}
+
+\title{5303 - Advanced Macroeconomics \\ Assignment X - Group Z}
+\author{Name1 \\ \and Name2 \\ \and Name3}
+\date{\today}
+
+\begin{document}
+\maketitle 
+
+\section{Exercise X}
+
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\begin{enumerate}[(a)]
+	\item 
+\end{enumerate}
+
+\begin{itemize}
+	\item
+\end{itemize}
+
+\begin{enumerate}
+	\item
+	\begin{itemize}
+		\item 
+		\item 
+		\item
+	\end{itemize}
+	\item
+	\begin{enumerate}[(a)]
+		\item 
+		\item
+	\end{enumerate}
+\end{enumerate}
+
+\begin{align*}
+	y &= x + z \\
+	z &= x
+\end{align*}
+
+\section*{Exercise Y}
+		
+
+\end{document}
+

@@ -1,0 +1,111 @@
+# Load required libraries
+library(ggplot2)
+library(binsmooth)
+library(dplyr)
+
+# Set seed for reproducibility
+set.seed(1234)
+
+# Simulation function
+assignment_random <- function() {
+	eps <- rnorm(20, mean = 0, sd = 1)
+	z <- rnorm(20, mean = 0, sd = 1)
+	x <- 1 * z + eps + rnorm(20, mean = 0, sd = 1)
+	y <- 1 * x + eps
+	
+	fs_model <- lm(x ~ z)
+	rss_fs <- sum(residuals(fs_model)^2)
+	f_stat <- summary(fs_model)$fstatistic[1]
+	
+	iv_model <- lm(y ~ x + z)
+	beta_iv1 <- coef(iv_model)[2]
+	
+	xp <- 1 * z
+	iv_model2 <- lm(y ~ xp)
+	beta_iv2 <- coef(iv_model2)[2]
+	
+	ess <- sum((x - xp)^2)
+	
+	return(list(rss_fs = rss_fs, ess_fs = ess, f_stat = f_stat, beta_iv1 = beta_iv1, beta_iv2 = beta_iv2))
+}
+
+# Run simulation
+results <- replicate(10000, assignment_random())
+
+# Save results to a file
+saveRDS(results, file = "output/ps3_q1_data.rds")
+
+# Load results from file
+results <- readRDS(file = "output/ps3_q1_data.rds")
+
+# Calculate mean of beta_iv1 and beta_iv2
+mean_beta_iv1 <- mean(results$beta_iv1)
+mean_beta_iv2 <- mean(results$beta_iv2)
+
+# Plot density of beta_iv1 and beta_iv2
+ggplot() +
+	geom_density(data = data.frame(beta_iv1 = results$beta_iv1), aes(x = beta_iv1), color = "red") +
+	geom_density(data = data.frame(beta_iv2 = results$beta_iv2), aes(x = beta_iv2), color = "blue") +
+	geom_vline(xintercept = mean_beta_iv1, linetype = "dashed", color = "red", alpha = 0.3) +
+	geom_vline(xintercept = mean_beta_iv2, linetype = "dashed", color = "blue", alpha = 0.3) +
+	labs(x = "", y = "") +
+	scale_color_manual(values = c("red", "blue")) +
+	scale_linetype_manual(values = c("solid", "dashed")) +
+	scale_alpha_manual(values = c(1, 0.3)) +
+	guides(color = guide_legend(order = 1), linetype = guide_legend(order = 2)) +
+	theme_minimal() +
+	theme(legend.position = c(0.8, 0.2))
+
+# Plot density of beta_iv1 and beta_iv2 within range -10 to 10
+ggplot() +
+	geom_line(data = data.frame(beta_iv1 = results$beta_iv1), aes(x = beta_iv1), color = "red") +
+	geom_line(data = data.frame(beta_iv2 = results$beta_iv2), aes(x = beta_iv2), color = "blue") +
+	geom_vline(xintercept = mean_beta_iv1, linetype = "dashed", color = "red", alpha = 0.3) +
+	geom_vline(xintercept = mean_beta_iv2, linetype = "dashed", color = "blue", alpha = 0.3) +
+	coord_cartesian(xlim = c(-10, 10)) +
+	labs(x = "", y = "") +
+	scale_color_manual(values = c("red", "blue")) +
+	scale_linetype_manual(values = c("solid", "dashed")) +
+	scale_alpha_manual(values = c(1, 0.3)) +
+	guides(color = guide_legend(order = 1), linetype = guide_legend(order = 2)) +
+	theme_minimal() +
+	theme(legend.position = c(0.8, 0.2))
+
+# Plot density of beta_iv1 and beta_iv2 within range -10 to 10 with smoothed lines
+ggplot() +
+	geom_smooth(data = data.frame(beta_iv1 = results$beta_iv1), aes(x = beta_iv1), color = "red") +
+	geom_smooth(data = data.frame(beta_iv2 = results$beta_iv2), aes(x = beta_iv2), color = "blue") +
+	geom_vline(xintercept = mean_beta_iv1, linetype = "dashed", color = "red", alpha = 0.3) +
+	geom_vline(xintercept = mean_beta_iv2, linetype = "dashed", color = "blue", alpha = 0.3) +
+	coord_cartesian(xlim = c(-10, 10)) +
+	labs(x = "", y = "") +
+	scale_color_manual(values = c("red", "blue")) +
+	scale_linetype_manual(values = c("solid", "dashed")) +
+	scale_alpha_manual(values = c(1, 0.3)) +
+	guides(color = guide_legend(order = 1), linetype = guide_legend(order = 2)) +
+	theme_minimal() +
+	theme(legend.position = c(0.8, 0.2))
+
+# Calculate mean of bias when beta_fs > 1 and beta_fs < 1
+mean_bias_gt1 <- mean(results$beta_iv1[results$beta_fs > 1] - 1)
+mean_bias_lt1 <- mean(results$beta_iv1[results$beta_fs < 1] - 1)
+
+# Plot binscatter of bias and f_stat
+binscatter(results$beta_fs, results$beta_iv1 - 1, xlab = "First stage coefficient estimate", ylab = "Absolute second stage bias")
+binscatter(results$beta_fs[results$f_stat > 10], results$beta_iv1[results$f_stat > 10] - 1, xlab = "First stage coefficient estimate", ylab = "Absolute second stage bias")
+
+# Calculate max ratio of rss_fs/ess_fs
+max_ratio_rss_ess <- max(results$rss_fs / results$ess_fs)
+
+# Plot binscatter of rss_fs and beta_fs, ess_fs and beta_fs, and rss_fs/ess_fs and beta_fs
+binscatter(results$beta_fs, results$rss_fs, xlab = "First stage coefficient estimate", ylab = "FS Residual Sum Of Squares")
+binscatter(results$beta_fs, results$ess_fs, xlab = "First stage coefficient estimate", ylab = "FS Error Sum Of Squares")
+binscatter(results$beta_fs, results$rss_fs / results$ess_fs, xlab = "First stage coefficient estimate", ylab = "Residual over Error Sum-Of-Square")
+
+# Plot binscatter of bias and beta_fs, f_stat and beta_fs
+binscatter(results$beta_fs, results$beta_iv1 - 1, xlab = "First stage coefficient estimate", ylab = "Absolute second stage bias")
+binscatter(results$beta_fs, results$f_stat, xlab = "First stage coefficient estimate", ylab = "First stage F-Statistic")
+
+# Calculate beta_fs for the largest and smallest absolute bias
+beta_fs_max_bias <- mean(results$beta_fs[which.max(abs(results$beta_iv1 - 1))])
+beta_fs_min_bias <- mean(results$beta_fs[which.min(abs(results$beta_iv1 - 1))])

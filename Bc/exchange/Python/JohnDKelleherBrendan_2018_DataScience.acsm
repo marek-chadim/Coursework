@@ -1,0 +1,38 @@
+<fulfillmentToken fulfillmentType="loan" auth="user" xmlns="http://ns.adobe.com/adept">
+  <distributor>urn:uuid:501e16ca-f45c-4a0c-9a9f-8a270a9f2ed6</distributor>
+  <operatorURL>http://rps2images.ebscohost.com/fulfillment</operatorURL>
+  <transaction>s1101997:24122073:1782063:1681312043876:1812624457</transaction>
+  <purchase>2023-04-12T15:07:23+00:00</purchase>
+  <expiration>2023-04-12T21:07:23+00:00</expiration>
+  <resourceItemInfo>
+    <resource>urn:uuid:59f87d34-4fbb-466f-bb40-9640e356cdd5</resource>
+    <resourceItem>0</resourceItem>
+    <metadata>
+      <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">Data Science</dc:title>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kelleher, John D.,Tierney, Brendan</dc:creator>
+      <dc:publisher xmlns:dc="http://purl.org/dc/elements/1.1/">MIT Press</dc:publisher>
+      <dc:format xmlns:dc="http://purl.org/dc/elements/1.1/">application/pdf</dc:format>
+      <dc:language xmlns:dc="http://purl.org/dc/elements/1.1/">eng</dc:language>
+    </metadata>
+    <licenseToken>
+      <resource>urn:uuid:59f87d34-4fbb-466f-bb40-9640e356cdd5</resource>
+      <permissions>
+        <display>
+          <until>2023-05-03T15:06:23+00:00</until>
+        </display>
+        <excerpt>
+          <until>2023-05-03T15:06:23+00:00</until>
+          <count initial="100"/>
+        </excerpt>
+        <print>
+          <until>2023-05-03T15:06:23+00:00</until>
+          <count initial="100"/>
+        </print>
+        <play>
+          <until>2023-05-03T15:06:23+00:00</until>
+        </play>
+      </permissions>
+    </licenseToken>
+  </resourceItemInfo>
+  <hmac>bH8+0Cn5M4O237t0ooC5HKW5dcE=</hmac>
+</fulfillmentToken>

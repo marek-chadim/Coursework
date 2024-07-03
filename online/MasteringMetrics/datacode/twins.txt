@@ -1,0 +1,21 @@
+	(1)	(2)	(3)	(4)	(5)
+VARIABLES	dlwage	lwage	dlwage	lwage	dlwage
+					
+educ		0.116		0.116	
+		(0.011)		(0.011)	
+age		0.104		0.104	
+		(0.012)		(0.012)	
+age2		-0.106		-0.106	
+		(0.015)		(0.015)	
+female		-0.316		-0.316	
+		(0.040)		(0.040)	
+white		-0.098		-0.098	
+		(0.068)		(0.068)	
+deduc	0.062		0.062		0.108
+	(0.020)		(0.020)		(0.034)
+Constant		-1.188		-1.188	
+		(0.305)		(0.305)	
+					
+Observations	340	680	340	680	340
+R-squared	0.031	0.338	0.031	0.338	
+Robust standard errors in parentheses					

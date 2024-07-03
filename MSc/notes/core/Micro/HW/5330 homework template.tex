@@ -1,0 +1,161 @@
+\documentclass[a4paper,11pt,american]{article}
+\usepackage[a4paper,margin=1.2in]{geometry}
+
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs} %important math packages
+\usepackage{amsthm} % Package for theorem and definition enviroments
+\usepackage{babel} % Language control, for hyphenation etc
+\usepackage{bbm}
+\usepackage{booktabs} % Better looking tables
+\usepackage{caption, subcaption, graphicx}
+\usepackage{comment}
+\usepackage[babel]{csquotes} % Better looking quotes
+\usepackage{enumerate} % package for making different lists
+\usepackage[shortlabels]{enumitem}
+\usepackage{float}
+\usepackage[T1]{fontenc} % Encoding of fonts
+\usepackage[hidelinks]{hyperref} %enable links for reference
+\usepackage{lmodern} % Latin modern font - needed for fontenc
+\usepackage[utf8]{inputenc} % Encoding of input text
+\usepackage[kerning]{microtype} % Better looking text
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+
+
+% This data must be adjusted per sheet:
+\newcommand{\GROUP}{'Group number'}%replace this with the number of your group
+\newcommand{\EXERCISES}{"Exercise number"}%replace this with the number of your exercise
+
+
+\newcommand{\COURSE}{5330 Assignment \EXERCISES}
+\newcommand{\TUTOR}{Zhaoqin Zhu}
+\newcommand{\STUDENTA}{John Doe}
+\newcommand{\STUDENTB}{Jane Doe}
+\newcommand{\STUDENTC}{Max Mustermann}
+\newcommand{\DEADLINE}{XX.0X.2019}
+
+\usepackage{fancyhdr}%please don't change this display style for the homework, but later on you can use this chunk to determine what to display on the head and foot of a page
+\pagestyle {fancy}
+\fancyhead[L]{Group: \GROUP}
+\fancyhead[C]{}
+\fancyhead[R]{\COURSE}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{\thepage}
+
+
+% define command for convenience, notice that these commands are user defined, so you cannot google for an answer.
+%format: \newcommand{'your new command in the file, cannot be googled'}{'what it is supposed to do, can be googled'}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\pp}{\mathbf{p}}
+\newtheorem{theorem}{Theorem}
+
+\title{Answers to Advanced microeconomics problem set \EXERCISES}
+\author{Your name here \thanks{Your email here}} % change your name and email here
+\date{\today}
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+I really recommend using the website "overleaf" for this work, which not only allows you write latex efficiently, but also allows many people to write on the same document! 
+
+To use this template, simply create a blank project in latex, and copy paste every word from this tex file into the template. The .tex file can also be opened by txt reader in Windows system.
+\section{Intro to latex}%you can start typing here
+%\begin{enumerate} allows you to organize answers with points efficiently
+\begin{enumerate}[(a)]
+    \item 
+    In most cases, the output starts from the line "begin\{ documents \}" and ends before the line "end\{ documents \}". Before the main text, people write lines to specify which package they want to use, what layout they want to have, and what personal commands they want to define.
+    Latex is usually powered by "environments", which stars with "begin\{environment\_1\}"\footnote{Also, notice how I typed the symbol "\_" in text} and ends with "end\{environment\_1\}". They can be nested into one another, but each "begin" must corresponds to an "end", and that is where beginners get things wrong.
+
+    \item 
+    The basic expression for math is $x+1=2$, if you want to stress an equation, use
+    \begin{equation}
+        x+1 = 2
+    \end{equation}
+    Use $\{$ and $\}$ to type the bracket symbol\footnote{By now you should realize that $\textbackslash$ can be added to escape certain symbols in latex}, use $x^2_1$ to type superscripts and subscripts.
+    To start a new line, use \\
+    The commands can be stacked up for many equations and lines.
+
+    \item 
+    The command above is to start a new item, within "enumerate" environment. Notice the "newcommand" commands in the template, they usually bring unique personally defined commands that cannot be googled.
+
+    \item 
+    If you cannot get a document, look at the errors and warnings, google them!
+
+    \item 
+    use \newpage to start a new page, use 
+    \begin{figure}
+        \centering
+        \includegraphics[scale=1]{How to draw a horse meme.png}%scale= controls how big your figure is in the text
+        \caption{Step 4 is really good enough for beginners}
+        \label{fig:enter-label}%you can change the label to distinguish different figures and equations, just ref the correct item when you need it
+    \end{figure}
+    to add a figure. Since your figure may fly around, use figure \ref{fig:enter-label} to make a reference. If you are using overleaf, the original figure should be uploaded to overleaf. The figure itself can be a photo taken from a phone, or drawings from "AutoDesk Sketchbook" or "Windows Ink Whiteboard"
+    
+\end{enumerate}
+
+\section{Exercise 1.17}%you can start typing here
+
+\section{Exercise 1.20}
+
+\section{Exercise 1.28, not in the homework, only for reference}
+This is to help you know how to type different equations and symbols in latex. You can also google for answer.
+\subsection{Original question}
+In the proof of Theorem 1.4 we use the fact that if $u(\cdot)$ is quasiconcave and differentiable at $\xx$ and $u(\mathbf{y}) \geq u(\xx)$, then $\nabla u(\xx) \cdot (\mathbf{y} - \xx) \geq 0$. Prove this fact in the following two steps.
+\begin{enumerate}[label = \alph*)]
+\item Prove that if $u(\mathbf{y}) \geq u(\xx)$, the quasiconcavity of $u(\cdot)$ and its differentiability at $\xx$ imply that the derivative of $u((1 - t) \xx + t \mathbf{y})$ with respect to $t$ must be non-negative at $t = 0$.
+\item Compute the derivative of $u((1 - t) \xx + t \mathbf{y})$ with respect to $t$ evaluated at $t = 0$ and show that it is $\nabla u(\xx) \cdot (\mathbf{y} - \xx)$.
+\end{enumerate}
+
+\subsection{Solution}
+\begin{enumerate}[label = \alph*)]
+    \item 
+        Recall that the definition of a partial derivative. Suppose that $f : D \mapsto \reals$ where $D \subseteq \reals^n$. Then if $\xx$ is an interior point of $D$, the partial derivative of $f$ with respect to $x_i$ at $\xx$ is defined as 
+    \begin{equation}
+    \frac{\partial f(x)}{\partial x_i} = \lim_{h \to 0}\frac{f(x_1, ..., x_i + h, ..., x_n) - f(x_1, ..., x_i, ..., x_n)}{h} \label{partial_definition}
+    \end{equation}
+    We are asked to show that the partial derivative of the convex combination of two bundles $(1 - t) \xx + t \mathbf{y}$ with regards to its modulus $t$, evaluated at the point $t = 0$ is non-negative. Formally, we write
+    \begin{equation}
+    \frac{\partial}{\partial t} u((1 - t) \xx + t \mathbf{y}) \Bigr\rvert_{t = 0} \geq 0 \label{2b_toprove}
+    \end{equation}
+    
+    Generally for any $t \in [0,1]$ our object of interest can be expressed as follows, using the definition of the partial derivative in (\ref{partial_definition}),
+    \begin{equation}
+    \frac{\partial}{\partial t} u((1 - t) \xx + t \mathbf{y}) = \lim_{h \to 0} \frac{ u((1 - (t + h)) \xx + (t + h) \mathbf{y}) - u((1 - t) \xx + t \mathbf{y})}{h}
+    \end{equation}
+    Hence, if we evaluate the partial derivative at $t = 0$, the expression becomes
+    \begin{align}
+    \frac{\partial}{\partial t} u((1 - t) \xx + t \mathbf{y})  \Bigr\rvert_{t = 0} = \lim_{h \to 0} \frac{ u((1 - h) \xx + h\mathbf{y}) - u( \xx )}{h} \label{directional}
+    \end{align}
+    Now note that we can write $(1 - t) \xx + t \mathbf{y}$ as $\xx + h (\mathbf{y} - \xx)$, so the right-hand side of (\ref{directional}) is the \textit{directional derivative} of $u$ at $\xx$ in the direction of $\mathbf{y} - \xx$. Since $u$ is differentiable at $\xx$ by assumption, the directional derivative exists in all directions and this particular limit is well-defined.
+    The quasiconcavity of $u$ and the assumption that $u(\mathbf{y}) \geq u(\xx)$ imply that for all $h \in [0,1]$ 
+    \begin{align*}
+        u((1 - h) \xx + h \mathbf{y}) - u( \xx ) &\geq \min[u(\mathbf{y}),u( \xx )] - u( \xx ) \\
+        &\geq u( \xx ) - u( \xx ) \\
+        &\geq 0
+    \end{align*}
+    This last inequality and equation (\ref{directional}) then imply (\ref{2b_toprove}).
+    
+    \item 
+    From page 276 in Pemberton \& Rau (2016), or page 555 in Jehle \& Reny (2011), we know that the following holds
+    \begin{align*}
+    \frac{d u((1 - t) \xx + t \mathbf{y})}{d t} &= 
+    \frac{\partial u((1 - t) \xx + t \mathbf{y})}{\partial x_1} (y_1 - x_1) \\
+    &+ \frac{\partial u((1 - t) \xx + t \mathbf{y})}{\partial x_2} +  (y_2 - x_2) \\
+    &... + \frac{\partial u((1 - t) \xx + t \mathbf{y})}{\partial x_n} +  (y_n - x_n) \\
+    &= \sum^{n}_{i = 1} \frac{\partial u((1 - t) \xx + t \mathbf{y})}{\partial x_i} (y_i - x_i) 
+    \end{align*}
+    Evaluating this expression at $t = 0$, we get that
+    \begin{align*}
+    \frac{d u((1 - t) \xx + t \mathbf{y})}{d t} \Bigr\rvert_{t = 0} 
+    &= \sum^{n}_{i = 1} \frac{\partial u(\xx)}{\partial x_i} (y_i - x_i) \\
+    &= \nabla u(\xx) \cdot (\mathbf{y} - \xx)
+    \end{align*}
+    where $\nabla u(\xx)$ is the gradient of $u$ at $\xx$, i.e. a column vector of length $n$ containing all the partial derivatives of $u$ at $\xx$, $\nabla u(\xx) = \{\partial u(\xx) / \partial x_1, ..., \partial u(\xx) / \partial x_n\}$.\footnote{This \enquote{proof} is a bit heuristic, admittedly.}
+\end{enumerate}
+
+
+\end{document}
